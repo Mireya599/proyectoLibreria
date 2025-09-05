@@ -26,3 +26,10 @@
         <p>Categorias</p>
     </a>
 </li>
+
+<li class="nav-item">
+    <a href="{{ route('proovedors.index') }}" class="nav-link {{ Request::is('proovedors*') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-home"></i>
+        <p>Proovedors</p>
+    </a>
+</li>
