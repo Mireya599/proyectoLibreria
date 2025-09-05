@@ -33,3 +33,10 @@
         <p>Proovedors</p>
     </a>
 </li>
+
+<li class="nav-item">
+    <a href="{{ route('compras.index') }}" class="nav-link {{ Request::is('compras*') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-home"></i>
+        <p>Compras</p>
+    </a>
+</li>
