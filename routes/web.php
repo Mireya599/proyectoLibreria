@@ -100,3 +100,4 @@ Route::group(['prefix' => ''], function () {
 
 Route::resource('ventas', App\Http\Controllers\VentaController::class);
 Route::resource('detalleVentas', App\Http\Controllers\detalleVentaController::class);
+Route::resource('productos', App\Http\Controllers\productoController::class);
