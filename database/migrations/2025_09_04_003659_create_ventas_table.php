@@ -14,7 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('ventas', function (Blueprint $table) {
-            $table->id('id');
+            $table->integer('id', true);
+            $table->string('codigo_factura', 50);
+            $table->decimal('total', 10, 0)->nullable();
+            $table->enum('tipo_pago', ['efectivo', 'tarjeta', 'otros'])->nullable();
+            $table->dateTime('fecha_venta')->nullable();
+            $table->integer('clientes_id')->index('fk_ventas_clientes1_idx');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -27,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::drop('ventas');
+        Schema::dropIfExists('ventas');
     }
 };

@@ -14,9 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('detalle_ventas', function (Blueprint $table) {
-            $table->id('id');
+            $table->integer('id', true);
+            $table->integer('cantidad')->nullable();
+            $table->decimal('precio_unitario', 10, 0)->nullable();
+            $table->decimal('subtotal', 10, 0)->nullable();
             $table->timestamps();
             $table->softDeletes();
+            $table->integer('ventas_id')->index('fk_detalle_ventas_ventas1_idx');
         });
     }
 
@@ -27,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::drop('detalle_ventas');
+        Schema::dropIfExists('detalle_ventas');
     }
 };
