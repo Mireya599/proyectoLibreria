@@ -1,24 +1,23 @@
 @extends('layouts.app')
 
-@section('titulo_pagina', 'Editar Proovedor' )
+@section('titulo_pagina', 'Crear Unidad Medida')
 
 @section('content')
 
 
+    <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>
-                        Editar Proovedor
-                    </h1>
+                    <h1>Crear Unidad Medida</h1>
                 </div>
                 <div class="col ">
-                    <a class="btn btn-outline-secondary float-right"
-                       href="{{ route('proovedors.index') }}"
-                    >
-                        <i class="fa fa-arrow-left"></i>
-                        Regresar
+                    <a class="btn btn-outline-info float-right"
+                       href="{{ route('unidadMedidas.index') }}"
+                        >
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;
+                        <span class="d-none d-sm-inline">Regresar</span>
                     </a>
                 </div>
             </div>
@@ -35,18 +34,21 @@
 
                     <div class="card">
 
-                        {!! Form::model($proovedor, ['route' => ['proovedors.update', $proovedor->id], 'method' => 'patch','class' => 'esperar']) !!}
+                        {!! Form::open(['route' => 'unidadMedidas.store','class' => 'esperar']) !!}
 
                         <div class="card-body">
+
                             <div class="form-row">
-                                @include('proovedors.fields')
+
+                                @include('unidad_medidas.fields')
+
                             </div>
                         </div>
 
                         <div class="card-footer text-right bg-white border-top">
 
-                            <a href="{{ route('proovedors.index') }}"
-                               class="btn btn-outline-secondary mr-1">
+                            <a href="{{ route('unidadMedidas.index') }}"
+                               class="btn btn-outline-secondary mr-2">
                                 <i class="fa fa-ban"></i>
                                 Cancelar
                             </a>
@@ -59,12 +61,12 @@
 
                         {!! Form::close() !!}
 
-
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
+
+
 
 @endsection

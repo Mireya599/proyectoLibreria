@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('titulo_pagina', 'Proovedors')
+@section('titulo_pagina', 'Proveedors')
 
 @section('content')
 
@@ -9,13 +9,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Proovedors</h1>
+                    <h1>Proveedors</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-right">
                         <li class="breadcrumb-item">
                             <a class="btn btn-outline-success"
-                               href="{{ route('proovedors.create') }}">
+                               href="{{ route('proveedors.create') }}">
                                 <i class="fa fa-plus"></i>
                                 <span class="d-none d-sm-inline">Nuevo</span>
                             </a>
@@ -34,7 +34,7 @@
             <div class="card card-primary">
                 <div class="card-body">
 
-                    @include('proovedors.table')
+                    @include('proveedors.table')
 
                 </div>
             </div>

@@ -7,7 +7,7 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Services\DataTable;
 
-class ProovedorDataTable extends DataTable
+class ProveedorDataTable extends DataTable
 {
     public function dataTable($query)
     {

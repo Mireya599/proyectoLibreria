@@ -2,12 +2,12 @@
 
 namespace App\DataTables;
 
-use App\Models\Categoria;
+use App\Models\Proveedor;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Services\DataTable;
 
-class CategoriaDataTable extends DataTable
+class ProveedorDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -20,13 +20,13 @@ class CategoriaDataTable extends DataTable
 
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', function(Categoria $categoria){
-                $id = $categoria->id;
-                return view('categorias.datatables_actions',compact('categoria','id'));
+            ->addColumn('action', function(Proveedor $proveedor){
+                $id = $proveedor->id;
+                return view('proveedors.datatables_actions',compact('proveedor','id'));
             })
-            ->editColumn('id',function (Categoria $categoria){
+            ->editColumn('id',function (Proveedor $proveedor){
 
-                return $categoria->id;
+                return $proveedor->id;
 
             })
             ->rawColumns(['action']);
@@ -35,10 +35,10 @@ class CategoriaDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Categoria $model
+     * @param \App\Models\Proveedor $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Categoria $model)
+    public function query(Proveedor $model)
     {
         return $model->newQuery()->select($model->getTable().'.*');
     }
@@ -108,7 +108,9 @@ class CategoriaDataTable extends DataTable
     {
         return [
             Column::make('nombre'),
-            Column::make('descripcion'),
+            Column::make('telefono'),
+            Column::make('direccion'),
+            Column::make('correo'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
@@ -124,6 +126,6 @@ class CategoriaDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'categorias_datatable_' . time();
+        return 'proveedors_datatable_' . time();
     }
 }

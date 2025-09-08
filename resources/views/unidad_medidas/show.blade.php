@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('titulo_pagina', 'Proovedor')
+@section('titulo_pagina', 'Unidad Medida')
 
 @section('content')
 
@@ -10,12 +10,12 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1>
-                        Proovedor detalle
+                        Unidad Medida detalle
                     </h1>
                 </div>
                 <div class="col ">
                     <a class="btn btn-outline-info float-right"
-                       href="{{ route('proovedors.index') }}"
+                       href="{{ route('unidadMedidas.index') }}"
                     >
                         <i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;
                         <span class="d-none d-sm-inline">Regresar</span>
@@ -39,7 +39,7 @@
 
                             <div class="form-row">
 
-                                @include('proovedors.show_fields')
+                                @include('unidad_medidas.show_fields')
 
                             </div>
                         </div>

@@ -6,27 +6,24 @@ use Illuminate\Database\Eloquent\Model;
  use Illuminate\Database\Eloquent\SoftDeletes;
  use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Categoria extends Model
+class UnidadMedida extends Model
 {
 
     use SoftDeletes;
     use HasFactory;
 
-    public $table = 'categorias';
+    public $table = 'unidad_medidas';
 
     public $fillable = [
-        'nombre',
-        'descripcion'
+        'nombre'
     ];
 
     protected $casts = [
-        'nombre' => 'string',
-        'descripcion' => 'string'
+        'nombre' => 'string'
     ];
 
     public static $rules = [
-        'nombre' => 'required|string|max:100',
-        'descripcion' => 'nullable|string|max:255',
+        'nombre' => 'nullable|string|max:45',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
         'deleted_at' => 'nullable'
@@ -38,6 +35,6 @@ class Categoria extends Model
 
     public function productos(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(\App\Models\Producto::class, 'categorias_id');
+        return $this->hasMany(\App\Models\Producto::class, 'unidad_medidas_id');
     }
 }

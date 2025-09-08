@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\productoDataTable;
-use App\Http\Requests\CreateproductoRequest;
-use App\Http\Requests\UpdateproductoRequest;
+use App\DataTables\ProductoDataTable;
+use App\Http\Requests\CreateProductoRequest;
+use App\Http\Requests\UpdateProductoRequest;
 use App\Http\Controllers\AppBaseController;
-use App\Models\producto;
+use App\Models\Producto;
 use Illuminate\Http\Request;
 
-class productoController extends AppBaseController
+class ProductoController extends AppBaseController
 {
 
     public function __construct()
@@ -20,16 +20,16 @@ class productoController extends AppBaseController
         $this->middleware('permission:Eliminar Productos')->only('destroy');
     }
     /**
-     * Display a listing of the producto.
+     * Display a listing of the Producto.
      */
-    public function index(productoDataTable $productoDataTable)
+    public function index(ProductoDataTable $productoDataTable)
     {
     return $productoDataTable->render('productos.index');
     }
 
 
     /**
-     * Show the form for creating a new producto.
+     * Show the form for creating a new Producto.
      */
     public function create()
     {
@@ -37,14 +37,14 @@ class productoController extends AppBaseController
     }
 
     /**
-     * Store a newly created producto in storage.
+     * Store a newly created Producto in storage.
      */
-    public function store(CreateproductoRequest $request)
+    public function store(CreateProductoRequest $request)
     {
         $input = $request->all();
 
-        /** @var producto $producto */
-        $producto = producto::create($input);
+        /** @var Producto $producto */
+        $producto = Producto::create($input);
 
         flash()->success('Producto guardado.');
 
@@ -52,12 +52,12 @@ class productoController extends AppBaseController
     }
 
     /**
-     * Display the specified producto.
+     * Display the specified Producto.
      */
     public function show($id)
     {
-        /** @var producto $producto */
-        $producto = producto::find($id);
+        /** @var Producto $producto */
+        $producto = Producto::find($id);
 
         if (empty($producto)) {
             flash()->error('Producto no encontrado');
@@ -69,12 +69,12 @@ class productoController extends AppBaseController
     }
 
     /**
-     * Show the form for editing the specified producto.
+     * Show the form for editing the specified Producto.
      */
     public function edit($id)
     {
-        /** @var producto $producto */
-        $producto = producto::find($id);
+        /** @var Producto $producto */
+        $producto = Producto::find($id);
 
         if (empty($producto)) {
             flash()->error('Producto no encontrado');
@@ -86,12 +86,12 @@ class productoController extends AppBaseController
     }
 
     /**
-     * Update the specified producto in storage.
+     * Update the specified Producto in storage.
      */
-    public function update($id, UpdateproductoRequest $request)
+    public function update($id, UpdateProductoRequest $request)
     {
-        /** @var producto $producto */
-        $producto = producto::find($id);
+        /** @var Producto $producto */
+        $producto = Producto::find($id);
 
         if (empty($producto)) {
             flash()->error('Producto no encontrado');
@@ -108,14 +108,14 @@ class productoController extends AppBaseController
     }
 
     /**
-     * Remove the specified producto from storage.
+     * Remove the specified Producto from storage.
      *
      * @throws \Exception
      */
     public function destroy($id)
     {
-        /** @var producto $producto */
-        $producto = producto::find($id);
+        /** @var Producto $producto */
+        $producto = Producto::find($id);
 
         if (empty($producto)) {
             flash()->error('Producto no encontrado');

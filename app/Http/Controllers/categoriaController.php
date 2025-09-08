@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\categoriaDataTable;
-use App\Http\Requests\CreatecategoriaRequest;
-use App\Http\Requests\UpdatecategoriaRequest;
+use App\DataTables\CategoriaDataTable;
+use App\Http\Requests\CreateCategoriaRequest;
+use App\Http\Requests\UpdateCategoriaRequest;
 use App\Http\Controllers\AppBaseController;
-use App\Models\categoria;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 
-class categoriaController extends AppBaseController
+class CategoriaController extends AppBaseController
 {
 
     public function __construct()
@@ -20,16 +20,16 @@ class categoriaController extends AppBaseController
         $this->middleware('permission:Eliminar Categorias')->only('destroy');
     }
     /**
-     * Display a listing of the categoria.
+     * Display a listing of the Categoria.
      */
-    public function index(categoriaDataTable $categoriaDataTable)
+    public function index(CategoriaDataTable $categoriaDataTable)
     {
     return $categoriaDataTable->render('categorias.index');
     }
 
 
     /**
-     * Show the form for creating a new categoria.
+     * Show the form for creating a new Categoria.
      */
     public function create()
     {
@@ -37,14 +37,14 @@ class categoriaController extends AppBaseController
     }
 
     /**
-     * Store a newly created categoria in storage.
+     * Store a newly created Categoria in storage.
      */
-    public function store(CreatecategoriaRequest $request)
+    public function store(CreateCategoriaRequest $request)
     {
         $input = $request->all();
 
-        /** @var categoria $categoria */
-        $categoria = categoria::create($input);
+        /** @var Categoria $categoria */
+        $categoria = Categoria::create($input);
 
         flash()->success('Categoria guardado.');
 
@@ -52,12 +52,12 @@ class categoriaController extends AppBaseController
     }
 
     /**
-     * Display the specified categoria.
+     * Display the specified Categoria.
      */
     public function show($id)
     {
-        /** @var categoria $categoria */
-        $categoria = categoria::find($id);
+        /** @var Categoria $categoria */
+        $categoria = Categoria::find($id);
 
         if (empty($categoria)) {
             flash()->error('Categoria no encontrado');
@@ -69,12 +69,12 @@ class categoriaController extends AppBaseController
     }
 
     /**
-     * Show the form for editing the specified categoria.
+     * Show the form for editing the specified Categoria.
      */
     public function edit($id)
     {
-        /** @var categoria $categoria */
-        $categoria = categoria::find($id);
+        /** @var Categoria $categoria */
+        $categoria = Categoria::find($id);
 
         if (empty($categoria)) {
             flash()->error('Categoria no encontrado');
@@ -86,12 +86,12 @@ class categoriaController extends AppBaseController
     }
 
     /**
-     * Update the specified categoria in storage.
+     * Update the specified Categoria in storage.
      */
-    public function update($id, UpdatecategoriaRequest $request)
+    public function update($id, UpdateCategoriaRequest $request)
     {
-        /** @var categoria $categoria */
-        $categoria = categoria::find($id);
+        /** @var Categoria $categoria */
+        $categoria = Categoria::find($id);
 
         if (empty($categoria)) {
             flash()->error('Categoria no encontrado');
@@ -108,14 +108,14 @@ class categoriaController extends AppBaseController
     }
 
     /**
-     * Remove the specified categoria from storage.
+     * Remove the specified Categoria from storage.
      *
      * @throws \Exception
      */
     public function destroy($id)
     {
-        /** @var categoria $categoria */
-        $categoria = categoria::find($id);
+        /** @var Categoria $categoria */
+        $categoria = Categoria::find($id);
 
         if (empty($categoria)) {
             flash()->error('Categoria no encontrado');

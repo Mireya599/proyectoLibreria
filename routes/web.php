@@ -105,3 +105,7 @@ Route::resource('categorias', App\Http\Controllers\categoriaController::class);
 Route::resource('proovedors', App\Http\Controllers\ProovedorController::class);
 Route::resource('compras', App\Http\Controllers\CompraController::class);
 Route::resource('clientes', App\Http\Controllers\ClienteController::class);
+Route::resource('productos', App\Http\Controllers\ProductoController::class);
+Route::resource('categorias', App\Http\Controllers\CategoriaController::class);
+Route::resource('proveedors', App\Http\Controllers\ProveedorController::class);
+Route::resource('unidadMedidas', App\Http\Controllers\UnidadMedidaController::class);

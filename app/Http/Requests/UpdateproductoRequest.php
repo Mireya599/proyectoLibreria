@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Models\producto;
+use App\Models\Producto;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateproductoRequest extends FormRequest
+class UpdateProductoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +24,13 @@ class UpdateproductoRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = producto::$rules;
+        $rules = Producto::$rules;
         
         return $rules;
     }
 
     public function messages()
     {
-        return producto::$messages;
+        return Producto::$messages;
     }
 }

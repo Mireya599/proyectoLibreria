@@ -1,12 +1,24 @@
-<!-- Created At Field -->
+<!-- Codigo Factura Field -->
 <div class="col-sm-12">
-    {!! Form::label('created_at', 'Created At:') !!}
-    <p>{{ $compra->created_at }}</p>
+    {!! Form::label('codigo_factura', 'Codigo Factura:') !!}
+    <p>{{ $compra->codigo_factura }}</p>
 </div>
 
-<!-- Updated At Field -->
+<!-- Fecha Compra Field -->
 <div class="col-sm-12">
-    {!! Form::label('updated_at', 'Updated At:') !!}
-    <p>{{ $compra->updated_at }}</p>
+    {!! Form::label('fecha_compra', 'Fecha Compra:') !!}
+    <p>{{ $compra->fecha_compra }}</p>
+</div>
+
+<!-- Tipo Pago Field -->
+<div class="col-sm-12">
+    {!! Form::label('tipo_pago', 'Tipo Pago:') !!}
+    <p>{{ $compra->tipo_pago }}</p>
+</div>
+
+<!-- Total Field -->
+<div class="col-sm-12">
+    {!! Form::label('total', 'Total:') !!}
+    <p>{{ $compra->total }}</p>
 </div>
 

@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Categoria;
+use App\Models\UnidadMedida;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateCategoriaRequest extends FormRequest
+class CreateUnidadMedidaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,11 @@ class CreateCategoriaRequest extends FormRequest
      */
     public function rules()
     {
-        return Categoria::$rules;
+        return UnidadMedida::$rules;
     }
 
     public function messages()
     {
-        return Categoria::$messages;
+        return UnidadMedida::$messages;
     }
 }

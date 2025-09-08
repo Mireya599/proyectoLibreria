@@ -219,16 +219,12 @@ function optionsParentAuthUser($user = null){
 
 }
 
-function getLogo($conversion='webp'){
-
-    /**
-     * @var Configuration $config
-     */
-    $config = Configuration::find(Configuration::LOGO);
-
-    $media = $config->getMediaLogo();
-
-    return $media ? $media->getUrl($conversion) : asset('img/default.svg');
+function getLogo($conversion = 'webp')
+{
+    return Configuration::find(Configuration::LOGO)
+        ?->getMediaLogo()
+        ?->getUrl($conversion)
+        ?? asset('img/default.svg');
 }
 
 function getFondoLogin($conversion=''){

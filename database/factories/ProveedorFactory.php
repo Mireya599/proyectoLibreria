@@ -2,18 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\Compra;
+use App\Models\Proveedor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 
-class CompraFactory extends Factory
+class ProveedorFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Compra::class;
+    protected $model = Proveedor::class;
 
     /**
      * Define the model's default state.
@@ -24,10 +24,10 @@ class CompraFactory extends Factory
     {
         
         return [
-            'codigo_factura' => $this->faker->text($this->faker->numberBetween(5, 50)),
-            'fecha_compra' => $this->faker->date('Y-m-d H:i:s'),
-            'tipo_pago' => $this->faker->text($this->faker->numberBetween(5, 4096)),
-            'total' => $this->faker->numberBetween(0, 9223372036854775807),
+            'nombre' => $this->faker->text($this->faker->numberBetween(5, 100)),
+            'telefono' => $this->faker->text($this->faker->numberBetween(5, 15)),
+            'direccion' => $this->faker->text($this->faker->numberBetween(5, 255)),
+            'correo' => $this->faker->text($this->faker->numberBetween(5, 50)),
             'created_at' => $this->faker->date('Y-m-d H:i:s'),
             'updated_at' => $this->faker->date('Y-m-d H:i:s'),
             'deleted_at' => $this->faker->date('Y-m-d H:i:s')

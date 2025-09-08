@@ -2,12 +2,12 @@
 
 namespace App\DataTables;
 
-use App\Models\Categoria;
+use App\Models\UnidadMedida;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Services\DataTable;
 
-class CategoriaDataTable extends DataTable
+class UnidadMedidaDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -20,13 +20,13 @@ class CategoriaDataTable extends DataTable
 
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', function(Categoria $categoria){
-                $id = $categoria->id;
-                return view('categorias.datatables_actions',compact('categoria','id'));
+            ->addColumn('action', function(UnidadMedida $unidadMedida){
+                $id = $unidadMedida->id;
+                return view('unidad_medidas.datatables_actions',compact('unidadMedida','id'));
             })
-            ->editColumn('id',function (Categoria $categoria){
+            ->editColumn('id',function (UnidadMedida $unidadMedida){
 
-                return $categoria->id;
+                return $unidadMedida->id;
 
             })
             ->rawColumns(['action']);
@@ -35,10 +35,10 @@ class CategoriaDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Categoria $model
+     * @param \App\Models\UnidadMedida $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Categoria $model)
+    public function query(UnidadMedida $model)
     {
         return $model->newQuery()->select($model->getTable().'.*');
     }
@@ -108,7 +108,6 @@ class CategoriaDataTable extends DataTable
     {
         return [
             Column::make('nombre'),
-            Column::make('descripcion'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
@@ -124,6 +123,6 @@ class CategoriaDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'categorias_datatable_' . time();
+        return 'unidad_medidas_datatable_' . time();
     }
 }
