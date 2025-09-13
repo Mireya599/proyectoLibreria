@@ -24,8 +24,14 @@ class ClienteFactory extends Factory
     {
         
         return [
+            'nombre' => $this->faker->text($this->faker->numberBetween(5, 100)),
+            'telefono' => $this->faker->text($this->faker->numberBetween(5, 15)),
+            'direccion' => $this->faker->text($this->faker->numberBetween(5, 255)),
+            'correo' => $this->faker->text($this->faker->numberBetween(5, 50)),
             'created_at' => $this->faker->date('Y-m-d H:i:s'),
-            'updated_at' => $this->faker->date('Y-m-d H:i:s')
+            'updated_at' => $this->faker->date('Y-m-d H:i:s'),
+            'deleted_at' => $this->faker->date('Y-m-d H:i:s'),
+            'nit' => $this->faker->text($this->faker->numberBetween(5, 20))
         ];
     }
 }

@@ -1,12 +1,30 @@
-<!-- Created At Field -->
+<!-- Nombre Field -->
 <div class="col-sm-12">
-    {!! Form::label('created_at', 'Created At:') !!}
-    <p>{{ $cliente->created_at }}</p>
+    {!! Form::label('nombre', 'Nombre:') !!}
+    <p>{{ $cliente->nombre }}</p>
 </div>
 
-<!-- Updated At Field -->
+<!-- Telefono Field -->
 <div class="col-sm-12">
-    {!! Form::label('updated_at', 'Updated At:') !!}
-    <p>{{ $cliente->updated_at }}</p>
+    {!! Form::label('telefono', 'Telefono:') !!}
+    <p>{{ $cliente->telefono }}</p>
+</div>
+
+<!-- Direccion Field -->
+<div class="col-sm-12">
+    {!! Form::label('direccion', 'Direccion:') !!}
+    <p>{{ $cliente->direccion }}</p>
+</div>
+
+<!-- Correo Field -->
+<div class="col-sm-12">
+    {!! Form::label('correo', 'Correo:') !!}
+    <p>{{ $cliente->correo }}</p>
+</div>
+
+<!-- Nit Field -->
+<div class="col-sm-12">
+    {!! Form::label('nit', 'Nit:') !!}
+    <p>{{ $cliente->nit }}</p>
 </div>
 

@@ -6,6 +6,7 @@ use App\DataTables\VentaDataTable;
 use App\Http\Requests\CreateVentaRequest;
 use App\Http\Requests\UpdateVentaRequest;
 use App\Http\Controllers\AppBaseController;
+use App\Models\Producto;
 use App\Models\Venta;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,8 @@ class VentaController extends AppBaseController
      */
     public function index(VentaDataTable $ventaDataTable)
     {
-    return $ventaDataTable->render('ventas.index');
+        $productos = Producto::all();
+    return $ventaDataTable->render('ventas.index', compact('productos'));
     }
 
 
@@ -41,6 +43,7 @@ class VentaController extends AppBaseController
      */
     public function store(CreateVentaRequest $request)
     {
+        dd($request->all());
         $input = $request->all();
 
         /** @var Venta $venta */

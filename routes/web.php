@@ -13,6 +13,7 @@ use App\Http\Controllers\PruebaApiController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\ProductoApiController;
 
 Auth::routes(['verify' => true]);
 
@@ -94,6 +95,7 @@ Route::group(['prefix' => ''], function () {
         ])
         ->name('cambio.idioma');
 
+    Route::get('/api/productos/search', [ProductoApiController::class, 'search'])->name('api.productos.search');
 
 });
 
