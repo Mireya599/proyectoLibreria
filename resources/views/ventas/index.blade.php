@@ -205,8 +205,8 @@
                 },
                 precioDeLista(p){
                     if(!p) return 0;
-                    const precioVenta     = Number(p.precio_libreria || 0);             // <— aquí
-                    const precioMayorista = Number(p.precio_mayorista || precioVenta);  // fallback al de librería
+                    const precioVenta     = Number(p.precio_libreria || 0);
+                    const precioMayorista = Number(p.precio_mayorista || precioVenta);
                     return this.listaPrecio === 'mayorista' ? precioMayorista : precioVenta;
                 },
                 agregar(){

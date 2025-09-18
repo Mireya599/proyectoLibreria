@@ -45,21 +45,27 @@
     {!! Form::label('ganancia', 'Ganancia:') !!}
     {!! Form::number('ganancia', null, ['class' => 'form-control']) !!}
 </div>
-
 <!-- Categorias Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('categorias_id', 'Categorias Id:') !!}
-    {!! Form::number('categorias_id', null, ['class' => 'form-control', 'required']) !!}
+    {!! Form::label('categorias_id', 'Categoría') !!}
+    {!! Form::select('categorias_id', $categorias, $producto->categorias_id, [
+        'class' => 'form-control select2',
+        'placeholder' => 'Seleccione una categoría'
+    ]) !!}
 </div>
 
-<!-- Proveedores Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('proveedores_id', 'Proveedores Id:') !!}
-    {!! Form::number('proveedores_id', null, ['class' => 'form-control', 'required']) !!}
+    {!! Form::label('proveedores_id', 'Proveedor') !!}
+    {!! Form::select('proveedores_id', $proveedores, $producto->proveedores_id, [
+        'class' => 'form-control select2',
+        'placeholder' => 'Seleccione un proveedor'
+    ]) !!}
 </div>
 
-<!-- Unidad Medidas Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('unidad_medidas_id', 'Unidad Medidas Id:') !!}
-    {!! Form::number('unidad_medidas_id', null, ['class' => 'form-control', 'required']) !!}
+    {!! Form::label('unidad_medidas_id', 'Unidad de Medida') !!}
+    {!! Form::select('unidad_medidas_id', $unidades, $producto->unidad_medidas_id, [
+        'class' => 'form-control select2',
+        'placeholder' => 'Seleccione una unidad'
+    ]) !!}
 </div>

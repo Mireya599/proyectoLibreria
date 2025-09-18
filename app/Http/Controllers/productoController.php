@@ -8,6 +8,10 @@ use App\Http\Requests\UpdateProductoRequest;
 use App\Http\Controllers\AppBaseController;
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use App\Models\Categoria;
+use App\Models\Proveedor;
+use App\Models\UnidadMedida;
+
 
 class ProductoController extends AppBaseController
 {
@@ -24,8 +28,12 @@ class ProductoController extends AppBaseController
      */
     public function index(ProductoDataTable $productoDataTable)
     {
-    return $productoDataTable->render('productos.index');
+        // basta con enviarlo como null (o como new Producto())
+        return $productoDataTable->render('productos.index', [
+            'producto' => null,
+        ]);
     }
+
 
 
     /**
@@ -33,7 +41,12 @@ class ProductoController extends AppBaseController
      */
     public function create()
     {
-        return view('productos.create');
+        $producto   = new Producto(); // <- importante
+        $categorias  = Categoria::orderBy('nombre')->pluck('nombre','id');
+        $proveedores = Proveedor::orderBy('nombre')->pluck('nombre','id');
+        $unidades    = UnidadMedida::orderBy('nombre')->pluck('nombre','id');
+
+        return view('productos.create', compact('producto','categorias','proveedores','unidades'));
     }
 
     /**
@@ -73,21 +86,18 @@ class ProductoController extends AppBaseController
      */
     public function edit($id)
     {
-        /** @var Producto $producto */
         $producto = Producto::find($id);
-
-        if (empty($producto)) {
+        if (!$producto) {
             flash()->error('Producto no encontrado');
-
-            return redirect(route('productos.index'));
+            return redirect()->route('productos.index');
         }
 
-        return view('productos.edit')->with('producto', $producto);
-    }
+        $categorias = Categoria::orderBy('nombre')->pluck('nombre', 'id');
+        $proveedores = Proveedor::orderBy('nombre')->pluck('nombre', 'id');
+        $unidades = UnidadMedida::orderBy('nombre')->pluck('nombre', 'id');
 
-    /**
-     * Update the specified Producto in storage.
-     */
+        return view('productos.edit', compact('producto', 'categorias', 'proveedores', 'unidades'));
+    }
     public function update($id, UpdateProductoRequest $request)
     {
         /** @var Producto $producto */
