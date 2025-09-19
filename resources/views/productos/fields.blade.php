@@ -19,7 +19,10 @@
 <!-- Precio Fabrica Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('precio_fabrica', 'Precio Fabrica:') !!}
-    {!! Form::number('precio_fabrica', null, ['class' => 'form-control']) !!}
+    {!! Form::number('precio_fabrica', old('precio_fabrica', optional($producto)->precio_fabrica), ['class' => 'form-control',
+    'id'    => 'precio_fabrica','min'   => 0, 'step'  => '0.01',
+]) !!}
+
 </div>
 
 <!-- Total Fabrica Field -->
@@ -31,7 +34,12 @@
 <!-- Precio Libreria Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('precio_libreria', 'Precio Libreria:') !!}
-    {!! Form::number('precio_libreria', null, ['class' => 'form-control']) !!}
+    {!! Form::number('precio_libreria', old('precio_libreria', optional($producto)->precio_libreria), [
+    'class' => 'form-control',
+    'id'    => 'precio_libreria',
+    'min'   => 0,
+    'step'  => '0.01',   // <-- importante
+]) !!}
 </div>
 
 <!-- Total Libreria Field -->

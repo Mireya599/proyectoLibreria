@@ -67,7 +67,7 @@ class Producto extends Model
 
     public function proveedores(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(\App\Models\Proveedore::class, 'proveedores_id');
+        return $this->belongsTo(\App\Models\Proveedor::class, 'proveedores_id');
     }
 
     public function unidadMedidas(): \Illuminate\Database\Eloquent\Relations\BelongsTo
