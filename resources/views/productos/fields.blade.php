@@ -13,45 +13,38 @@
 <!-- Cantidad Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('cantidad', 'Cantidad:') !!}
-    {!! Form::number('cantidad', null, ['class' => 'form-control']) !!}
+    <input class="form-control" v-model="cantidad">
 </div>
 
 <!-- Precio Fabrica Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('precio_fabrica', 'Precio Fabrica:') !!}
-    {!! Form::number('precio_fabrica', old('precio_fabrica', optional($producto)->precio_fabrica), ['class' => 'form-control',
-    'id'    => 'precio_fabrica','min'   => 0, 'step'  => '0.01',
-]) !!}
+    <input class="form-control" v-model="precioFabrica">
 
 </div>
 
 <!-- Total Fabrica Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('total_fabrica', 'Total Fabrica:') !!}
-    {!! Form::number('total_fabrica', null, ['class' => 'form-control']) !!}
+    <input class="form-control" v-model="totalFabrica" disabled>
 </div>
 
 <!-- Precio Libreria Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('precio_libreria', 'Precio Libreria:') !!}
-    {!! Form::number('precio_libreria', old('precio_libreria', optional($producto)->precio_libreria), [
-    'class' => 'form-control',
-    'id'    => 'precio_libreria',
-    'min'   => 0,
-    'step'  => '0.01',   // <-- importante
-]) !!}
+    <input class="form-control" v-model="precioLibreria">
 </div>
 
 <!-- Total Libreria Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('total_libreria', 'Total Libreria:') !!}
-    {!! Form::number('total_libreria', null, ['class' => 'form-control']) !!}
+    <input class="form-control" v-model="totalLibreria" disabled>
 </div>
 
 <!-- Ganancia Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('ganancia', 'Ganancia:') !!}
-    {!! Form::number('ganancia', null, ['class' => 'form-control']) !!}
+    <input class="form-control" v-model="ganancia" disabled>
 </div>
 <!-- Categorias Id Field -->
 <div class="form-group col-sm-6">
@@ -77,3 +70,28 @@
         'placeholder' => 'Seleccione una unidad'
     ]) !!}
 </div>
+
+
+@push('scripts')
+    <script>
+        new Vue ({
+            el: '#vueProducto',
+            data:{
+                precioFabrica: 0,
+                cantidad: 0,
+                precioLibreria: 0,
+            },
+            computed: {
+                totalFabrica(){
+                    return this.precioFabrica * this.cantidad
+                },
+                totalLibreria(){
+                    return this.precioLibreria * this.cantidad
+                },
+                ganancia(){
+                    return this.totalLibreria - this.totalFabrica
+                }
+            }
+        })
+    </script>
+@endpush

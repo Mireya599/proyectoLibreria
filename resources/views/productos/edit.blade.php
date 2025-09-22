@@ -38,7 +38,7 @@
                         {!! Form::model($producto, ['route' => ['productos.update', $producto->id], 'method' => 'patch','class' => 'esperar']) !!}
 
                         <div class="card-body">
-                            <div class="form-row">
+                            <div class="form-row" id="vueProducto">
                                 @include('productos.fields')
                             </div>
                         </div>

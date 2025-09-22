@@ -38,7 +38,7 @@
 
                         <div class="card-body">
 
-                            <div class="form-row">
+                            <div class="form-row" id="vueProducto">
 
                                 @include('productos.fields')
 
