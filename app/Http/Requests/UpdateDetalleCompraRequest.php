@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Models\DetalleVenta;
+use App\Models\DetalleCompra;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateDetalleVentaRequest extends FormRequest
+class UpdateDetalleCompraRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,13 @@ class CreateDetalleVentaRequest extends FormRequest
      */
     public function rules()
     {
-        return DetalleVenta::$rules;
+        $rules = DetalleCompra::$rules;
+        
+        return $rules;
     }
 
     public function messages()
     {
-        return DetalleVenta::$messages;
+        return DetalleCompra::$messages;
     }
 }

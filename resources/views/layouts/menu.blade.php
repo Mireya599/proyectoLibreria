@@ -61,3 +61,10 @@
         <p>Unidad Medidas</p>
     </a>
 </li>
+
+<li class="nav-item">
+    <a href="{{ route('detalleCompras.index') }}" class="nav-link {{ Request::is('detalleCompras*') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-home"></i>
+        <p>Detalle Compras</p>
+    </a>
+</li>

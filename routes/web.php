@@ -111,3 +111,6 @@ Route::resource('productos', App\Http\Controllers\ProductoController::class);
 Route::resource('categorias', App\Http\Controllers\CategoriaController::class);
 Route::resource('proveedors', App\Http\Controllers\ProveedorController::class);
 Route::resource('unidadMedidas', App\Http\Controllers\UnidadMedidaController::class);
+
+Route::resource('detalleVentas', App\Http\Controllers\DetalleVentaController::class);
+Route::resource('detalleCompras', App\Http\Controllers\DetalleCompraController::class);

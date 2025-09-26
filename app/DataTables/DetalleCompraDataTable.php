@@ -2,12 +2,12 @@
 
 namespace App\DataTables;
 
-use App\Models\DetalleVenta;
+use App\Models\DetalleCompra;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Services\DataTable;
 
-class DetalleVentaDataTable extends DataTable
+class DetalleCompraDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -20,13 +20,13 @@ class DetalleVentaDataTable extends DataTable
 
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', function(DetalleVenta $detalleVenta){
-                $id = $detalleVenta->id;
-                return view('detalle_ventas.datatables_actions',compact('detalleVenta','id'));
+            ->addColumn('action', function(DetalleCompra $detalleCompra){
+                $id = $detalleCompra->id;
+                return view('detalle_compras.datatables_actions',compact('detalleCompra','id'));
             })
-            ->editColumn('id',function (DetalleVenta $detalleVenta){
+            ->editColumn('id',function (DetalleCompra $detalleCompra){
 
-                return $detalleVenta->id;
+                return $detalleCompra->id;
 
             })
             ->rawColumns(['action']);
@@ -35,10 +35,10 @@ class DetalleVentaDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\DetalleVenta $model
+     * @param \App\Models\DetalleCompra $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(DetalleVenta $model)
+    public function query(DetalleCompra $model)
     {
         return $model->newQuery()->select($model->getTable().'.*');
     }
@@ -110,7 +110,9 @@ class DetalleVentaDataTable extends DataTable
             Column::make('cantidad'),
             Column::make('precio_unitario'),
             Column::make('subtotal'),
-            Column::make('ventas_id'),
+            Column::make('compras_id'),
+            Column::make('productos_id'),
+            Column::make('update_at'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
@@ -126,6 +128,6 @@ class DetalleVentaDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'detalle_ventas_datatable_' . time();
+        return 'detalle_compras_datatable_' . time();
     }
 }

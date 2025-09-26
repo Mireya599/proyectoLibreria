@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\detalleVentaDataTable;
-use App\Http\Requests\CreatedetalleVentaRequest;
-use App\Http\Requests\UpdatedetalleVentaRequest;
+use App\DataTables\DetalleVentaDataTable;
+use App\Http\Requests\CreateDetalleVentaRequest;
+use App\Http\Requests\UpdateDetalleVentaRequest;
 use App\Http\Controllers\AppBaseController;
-use App\Models\detalleVenta;
+use App\Models\DetalleVenta;
 use Illuminate\Http\Request;
 
-class detalleVentaController extends AppBaseController
+class DetalleVentaController extends AppBaseController
 {
 
     public function __construct()
@@ -20,16 +20,16 @@ class detalleVentaController extends AppBaseController
         $this->middleware('permission:Eliminar Detalle Ventas')->only('destroy');
     }
     /**
-     * Display a listing of the detalleVenta.
+     * Display a listing of the DetalleVenta.
      */
-    public function index(detalleVentaDataTable $detalleVentaDataTable)
+    public function index(DetalleVentaDataTable $detalleVentaDataTable)
     {
     return $detalleVentaDataTable->render('detalle_ventas.index');
     }
 
 
     /**
-     * Show the form for creating a new detalleVenta.
+     * Show the form for creating a new DetalleVenta.
      */
     public function create()
     {
@@ -37,14 +37,14 @@ class detalleVentaController extends AppBaseController
     }
 
     /**
-     * Store a newly created detalleVenta in storage.
+     * Store a newly created DetalleVenta in storage.
      */
-    public function store(CreatedetalleVentaRequest $request)
+    public function store(CreateDetalleVentaRequest $request)
     {
         $input = $request->all();
 
-        /** @var detalleVenta $detalleVenta */
-        $detalleVenta = detalleVenta::create($input);
+        /** @var DetalleVenta $detalleVenta */
+        $detalleVenta = DetalleVenta::create($input);
 
         flash()->success('Detalle Venta guardado.');
 
@@ -52,12 +52,12 @@ class detalleVentaController extends AppBaseController
     }
 
     /**
-     * Display the specified detalleVenta.
+     * Display the specified DetalleVenta.
      */
     public function show($id)
     {
-        /** @var detalleVenta $detalleVenta */
-        $detalleVenta = detalleVenta::find($id);
+        /** @var DetalleVenta $detalleVenta */
+        $detalleVenta = DetalleVenta::find($id);
 
         if (empty($detalleVenta)) {
             flash()->error('Detalle Venta no encontrado');
@@ -69,12 +69,12 @@ class detalleVentaController extends AppBaseController
     }
 
     /**
-     * Show the form for editing the specified detalleVenta.
+     * Show the form for editing the specified DetalleVenta.
      */
     public function edit($id)
     {
-        /** @var detalleVenta $detalleVenta */
-        $detalleVenta = detalleVenta::find($id);
+        /** @var DetalleVenta $detalleVenta */
+        $detalleVenta = DetalleVenta::find($id);
 
         if (empty($detalleVenta)) {
             flash()->error('Detalle Venta no encontrado');
@@ -86,12 +86,12 @@ class detalleVentaController extends AppBaseController
     }
 
     /**
-     * Update the specified detalleVenta in storage.
+     * Update the specified DetalleVenta in storage.
      */
-    public function update($id, UpdatedetalleVentaRequest $request)
+    public function update($id, UpdateDetalleVentaRequest $request)
     {
-        /** @var detalleVenta $detalleVenta */
-        $detalleVenta = detalleVenta::find($id);
+        /** @var DetalleVenta $detalleVenta */
+        $detalleVenta = DetalleVenta::find($id);
 
         if (empty($detalleVenta)) {
             flash()->error('Detalle Venta no encontrado');
@@ -108,14 +108,14 @@ class detalleVentaController extends AppBaseController
     }
 
     /**
-     * Remove the specified detalleVenta from storage.
+     * Remove the specified DetalleVenta from storage.
      *
      * @throws \Exception
      */
     public function destroy($id)
     {
-        /** @var detalleVenta $detalleVenta */
-        $detalleVenta = detalleVenta::find($id);
+        /** @var DetalleVenta $detalleVenta */
+        $detalleVenta = DetalleVenta::find($id);
 
         if (empty($detalleVenta)) {
             flash()->error('Detalle Venta no encontrado');
