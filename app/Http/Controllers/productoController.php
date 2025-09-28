@@ -54,14 +54,17 @@ class ProductoController extends AppBaseController
      */
     public function store(CreateProductoRequest $request)
     {
-        $input = $request->all();
+        $data = $request->validated();
 
-        /** @var Producto $producto */
-        $producto = Producto::create($input);
+        // Recalcular en servidor (no confiar en el cliente)
+        $data['total_fabrica']  = ($data['precio_fabrica'] ?? 0)  * ($data['cantidad'] ?? 0);
+        $data['total_libreria'] = ($data['precio_libreria'] ?? 0) * ($data['cantidad'] ?? 0);
+        $data['ganancia']       = $data['total_libreria'] - $data['total_fabrica'];
+
+        Producto::create($data);
 
         flash()->success('Producto guardado.');
-
-        return redirect(route('productos.index'));
+        return redirect()->route('productos.index');
     }
 
     /**
@@ -100,21 +103,22 @@ class ProductoController extends AppBaseController
     }
     public function update($id, UpdateProductoRequest $request)
     {
-        /** @var Producto $producto */
         $producto = Producto::find($id);
-
-        if (empty($producto)) {
+        if (!$producto) {
             flash()->error('Producto no encontrado');
-
-            return redirect(route('productos.index'));
+            return redirect()->route('productos.index');
         }
 
-        $producto->fill($request->all());
-        $producto->save();
+        $data = $request->validated();
+
+        $data['total_fabrica']  = ($data['precio_fabrica'] ?? 0)  * ($data['cantidad'] ?? 0);
+        $data['total_libreria'] = ($data['precio_libreria'] ?? 0) * ($data['cantidad'] ?? 0);
+        $data['ganancia']       = $data['total_libreria'] - $data['total_fabrica'];
+
+        $producto->update($data);
 
         flash()->success('Producto actualizado.');
-
-        return redirect(route('productos.index'));
+        return redirect()->route('productos.index');
     }
 
     /**

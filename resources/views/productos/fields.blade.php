@@ -13,38 +13,41 @@
 <!-- Cantidad Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('cantidad', 'Cantidad:') !!}
-    <input class="form-control" v-model="cantidad">
+    <input class="form-control" v-model="cantidad" name="cantidad" value="cantidad">
 </div>
 
 <!-- Precio Fabrica Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('precio_fabrica', 'Precio Fabrica:') !!}
-    <input class="form-control" v-model="precioFabrica">
+    <input class="form-control" v-model="precioFabrica" name="precio_fabrica" value="precio_fabrica">
 
 </div>
 
 <!-- Total Fabrica Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('total_fabrica', 'Total Fabrica:') !!}
-    <input class="form-control" v-model="totalFabrica" disabled>
+    <input class="form-control" v-model="totalFabrica" name="total_fabrica" disabled>
+    <input type="hidden" name="total_fabrica" :value="totalFabrica.toFixed(2)">
 </div>
 
 <!-- Precio Libreria Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('precio_libreria', 'Precio Libreria:') !!}
-    <input class="form-control" v-model="precioLibreria">
+    <input class="form-control" v-model="precioLibreria" name="precio_libreria">
 </div>
 
 <!-- Total Libreria Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('total_libreria', 'Total Libreria:') !!}
-    <input class="form-control" v-model="totalLibreria" disabled>
+    <input class="form-control" v-model="totalLibreria" name="total_libreria" disabled>
+    <input type="hidden" name="total_libreria" :value="totalLibreria.toFixed(2)">
 </div>
 
 <!-- Ganancia Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('ganancia', 'Ganancia:') !!}
-    <input class="form-control" v-model="ganancia" disabled>
+    <input class="form-control" v-model="ganancia" name="ganancia" disabled>
+    <input type="hidden" name="ganancia" :value="ganancia.toFixed(2)">
 </div>
 <!-- Categorias Id Field -->
 <div class="form-group col-sm-6">

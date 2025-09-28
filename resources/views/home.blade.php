@@ -34,40 +34,37 @@
 
 
         <!-- Main content -->
-
-
         <div class="content">
             <div class="container-fluid ">
 
-
-
-                <div class="row px-2 sortable">
-
-                    <div class="col-6 col-lg-2 px-4 py-2 " v-for="shortcut in shortcuts">
-
-
-                        <div class="card text-center opciones-ordenar" :data-id="shortcut.id">
-
-                            <span class="badge bg-danger" v-if="editando">
-                                <button type="button" class="btn btn-outline-danger btn-sm rounded-circle" @click="removerAcceso(shortcut)">
-                                    <i class="fa fa-trash  text-white"></i>
-                                </button>
-                            </span>
-
-                            <a :href="shortcut.ruta_evaluada" >
+                {{-- Acciones rápidas fijas (siempre visibles) — agregado aquí --}}
+                <div class="row px-2 mb-3">
+                    <div class="col-6 col-lg-2 px-4 py-2">
+                        <a href="{{ route('ventas.create') }}">
+                            <div class="card text-center">
                                 <div class="card-body p-1">
-
-
-                                    <span class="fa-stack fa-xl my-2" >
-                                      <i class="fa fa-circle fa-stack-2x " :class="shortcut.color"></i>
-                                      <i class="fa fa-stack-1x fa-inverse" :class="shortcut.icono_l"></i>
-                                    </span>
-
-                                    <p class="card-text mb-2" v-text="shortcut.nombre"></p>
+                                  <span class="fa-stack fa-xl my-2">
+                                    <i class="fa fa-circle fa-stack-2x text-success"></i>
+                                    <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                                  </span>
+                                    <p class="card-text mb-2">Registrar Venta</p>
                                 </div>
-                            </a>
-                        </div>
+                            </div>
+                        </a>
+                    </div>
 
+                    <div class="col-6 col-lg-2 px-4 py-2">
+                        <a href="{{ route('compras.create') }}">
+                            <div class="card text-center">
+                                <div class="card-body p-1">
+                                  <span class="fa-stack fa-xl my-2">
+                                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                    <i class="fa fa-truck fa-stack-1x fa-inverse"></i>
+                                  </span>
+                                    <p class="card-text mb-2">Registrar Compra</p>
+                                </div>
+                            </div>
+                        </a>
                     </div>
 
                 </div>
