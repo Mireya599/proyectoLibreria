@@ -8,18 +8,17 @@
             <div class="d-flex align-items-center justify-content-between">
                 <div>
                     <h1 class="mb-1">Nueva Venta</h1>
-                    <div class="text-muted small">Gestiona la venta y añade <strong>Productos</strong> desde el buscador</div>
                 </div>
-                <div class="btn-toolbar" role="toolbar">
-                    <div class="btn-group mr-2">
-                        <a href="{{ route('ventas.index') }}" class="btn btn-outline-secondary">
-                            <i class="fas fa-arrow-left mr-1"></i> Volver
-                        </a>
-                        <a href="{{ route('ventas.create') }}" class="btn btn-outline-primary">
-                            <i class="fas fa-plus mr-1"></i> Nueva
-                        </a>
-                    </div>
-                </div>
+{{--                <div class="btn-toolbar" role="toolbar">--}}
+{{--                    <div class="btn-group mr-2">--}}
+{{--                        <a href="{{ route('ventas.index') }}" class="btn btn-outline-secondary">--}}
+{{--                            <i class="fas fa-arrow-left mr-1"></i> Volver--}}
+{{--                        </a>--}}
+{{--                        <a href="{{ route('ventas.create') }}" class="btn btn-outline-primary">--}}
+{{--                            <i class="fas fa-plus mr-1"></i> Nueva--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
             </div>
         </div>
     </section>
