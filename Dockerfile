@@ -14,7 +14,7 @@ COPY --from=composer:2.6 /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www
 
 # Copiar código
-COPY ../../.. .
+COPY . .
 
 # Instalar dependencias de Laravel
 RUN composer install
