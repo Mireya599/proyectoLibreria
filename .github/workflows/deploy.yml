@@ -1,0 +1,60 @@
+name: Deploy to AWS EC2
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Copy files via SSH
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ubuntu
+          key: ${{ secrets.AWS_SSH_KEY }}
+          source: "."
+          target: "/home/ubuntu/laravel-app"
+
+      - name: Create .env file on server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ubuntu
+          key: ${{ secrets.AWS_SSH_KEY }}
+          script: |
+            cd /home/ubuntu/laravel-app
+            echo "APP_ENV=local" > .env
+            echo "APP_KEY=${{ secrets.APP_KEY }}" >> .env
+            echo "APP_DEBUG=true" >> .env
+            echo "APP_URL=${{ secrets.APP_URL }}" >> .env
+            echo "DB_CONNECTION=mysql" >> .env
+            echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
+            echo "DB_PORT=3306" >> .env
+            echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
+            echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
+            echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+
+      - name: Run SSH commands
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ubuntu
+          key: ${{ secrets.AWS_SSH_KEY }}
+          script: |
+            cd /home/ubuntu/laravel-app
+            sudo docker-compose down
+            sudo docker-compose up -d --build
+            sudo docker-compose exec -T app php artisan migrate --force
+            sudo docker-compose exec -T app php artisan key:generate --force
+            sudo docker-compose exec -T app php artisan config:cache
+            sudo docker-compose exec -T app php artisan route:cache
+            sudo docker-compose exec -T app php artisan view:cache
+            sudo docker-compose exec -T app php artisan storage:link
+            sudo docker-compose exec -T app chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
+            sudo docker-compose exec -T app chmod -R 775 /var/www/storage /var/www/bootstrap/cache
