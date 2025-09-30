@@ -1,7 +1,7 @@
 services:   # 👈 Aquí definimos los contenedores que forman parte de la app
     app:      # 👈 Este es el contenedor de Laravel (PHP-FPM)
         build:
-            context: ../../..               # 👈 Usa el Dockerfile que está en la raíz del proyecto
+            context: .               # 👈 Usa el Dockerfile que está en la raíz del proyecto
             dockerfile: Dockerfile   # 👈 Archivo Dockerfile para construir la imagen de Laravel
         container_name: laravel_app
         restart: unless-stopped    # 👈 Si el contenedor se apaga, se reinicia automáticamente
