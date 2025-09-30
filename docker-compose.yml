@@ -10,7 +10,7 @@ services:   # 👈 Aquí definimos los contenedores que forman parte de la app
             - laravel                # 👈 Conecta este contenedor a la red "laravel"
         command: ["php-fpm", "-F"] # 👈 Arranca PHP-FPM en primer plano (sirve PHP)
 
-    webserver:   # 👈 Este es el contenedor Nginx (el servidor web)
+    webserver:   # 👈 Este es el contenedor N ginx (el servidor web)
         image: nginx:alpine        # 👈 Usa la imagen oficial de Nginx (versión ligera Alpine)
         container_name: laravel_nginx
         restart: unless-stopped
