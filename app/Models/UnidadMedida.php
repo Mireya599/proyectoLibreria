@@ -15,15 +15,24 @@ class UnidadMedida extends Model
     public $table = 'unidad_medidas';
 
     public $fillable = [
-        'nombre'
+        'nombre',
+        'categoria',
+        'unidad_comercial',
+        'equivalencia'
     ];
 
     protected $casts = [
-        'nombre' => 'string'
+        'nombre' => 'string',
+        'categoria' => 'string',
+        'unidad_comercial' => 'string',
+        'equivalencia' => 'string'
     ];
 
     public static $rules = [
         'nombre' => 'nullable|string|max:45',
+        'categoria' => 'nullable|string|max:60',
+        'unidad_comercial' => 'nullable|string|max:120',
+        'equivalencia' => 'nullable|string|max:120',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
         'deleted_at' => 'nullable'
@@ -36,5 +45,15 @@ class UnidadMedida extends Model
     public function productos(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(\App\Models\Producto::class, 'unidad_medidas_id');
+    }
+
+    public function unidadEquivalencias(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(\App\Models\UnidadEquivalencia::class, 'unidad_base_id');
+    }
+
+    public function unidadEquivalencia1s(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(\App\Models\UnidadEquivalencia::class, 'unidad_id');
     }
 }

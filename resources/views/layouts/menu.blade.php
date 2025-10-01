@@ -68,3 +68,10 @@
         <p>Detalle Compras</p>
     </a>
 </li>
+
+<li class="nav-item">
+    <a href="{{ route('unidadEquivalencias.index') }}" class="nav-link {{ Request::is('unidadEquivalencias*') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-home"></i>
+        <p>Unidad Equivalencias</p>
+    </a>
+</li>

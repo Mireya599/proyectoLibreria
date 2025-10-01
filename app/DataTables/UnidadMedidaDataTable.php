@@ -108,6 +108,9 @@ class UnidadMedidaDataTable extends DataTable
     {
         return [
             Column::make('nombre'),
+            Column::make('categoria'),
+            Column::make('unidad_comercial'),
+            Column::make('equivalencia'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

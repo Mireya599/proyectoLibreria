@@ -57,5 +57,6 @@ jobs:
             sudo docker-compose exec -T app php artisan config:cache
             sudo docker-compose exec -T app php artisan route:cache
             sudo docker-compose exec -T app php artisan view:cache
+            sudo docker-compose exec -T app php artisan passport:keys
             sudo docker-compose exec -T app php artisan storage:link
 
