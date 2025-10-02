@@ -22,7 +22,7 @@ class DetalleVenta extends Model
         'precio_unitario',
         'subtotal',
         'lista_precio',
-        'unidad_id'
+//        'unidad_id'
     ];
 
     // Usa 2 decimales para importes
@@ -35,7 +35,7 @@ class DetalleVenta extends Model
     public static $rules = [
         'ventas_id'       => 'required|integer',
         'producto_id'     => 'nullable|integer',
-        'unidad_id'       => 'nullable|integer',
+//        'unidad_id'       => 'nullable|integer',
         'lista_precio'    => 'nullable|in:venta,mayorista',
         'descripcion'     => 'nullable|string|max:255',
         'unidad'          => 'nullable|string|max:50',

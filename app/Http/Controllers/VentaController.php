@@ -10,6 +10,8 @@ use App\Models\Producto;
 use App\Models\Venta;
 use Illuminate\Http\Request;
 use App\Models\UnidadMedida;
+use Illuminate\Support\Facades\DB;
+use App\Models\DetalleVenta;
 
 class VentaController extends AppBaseController
 {
@@ -42,20 +44,19 @@ class VentaController extends AppBaseController
 
         $productos = Producto::select('id','codigo','descripcion','precio_libreria','unidad_medidas_id')->get();
         $unidades  = UnidadMedida::select('id','nombre','factor')->get();
-dd($productos, $unidades);
+        dd($productos, $unidades);
         return view('ventas.create', compact('productos','unidades'));
     }
 
 
     public function store(CreateVentaRequest $request)
     {
-        dd($request);
+//        dd($request);
         DB::transaction(function() use ($request) {
 
             $venta = Venta::create([
                 'clientes_id' => $request->input('clientes_id'),
                 'total'       => $request->input('total'),
-                // otros campos de cabecera…
             ]);
 
             $productoIds   = $request->input('producto_id', []);
