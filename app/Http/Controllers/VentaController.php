@@ -9,6 +9,7 @@ use App\Http\Controllers\AppBaseController;
 use App\Models\Producto;
 use App\Models\Venta;
 use Illuminate\Http\Request;
+use App\Models\UnidadMedida;
 
 class VentaController extends AppBaseController
 {
@@ -25,8 +26,11 @@ class VentaController extends AppBaseController
      */
     public function index(VentaDataTable $ventaDataTable)
     {
-        $productos = Producto::all();
-    return $ventaDataTable->render('ventas.index', compact('productos'));
+
+        $productos = Producto::select('id','codigo','descripcion','precio_libreria','unidad_medidas_id')->get();
+        $unidades  = UnidadMedida::select('id','nombre','factor')->get();
+
+        return $ventaDataTable->render('ventas.index', compact('productos','unidades'));
     }
 
 
@@ -35,24 +39,53 @@ class VentaController extends AppBaseController
      */
     public function create()
     {
-        return view('ventas.create');
+
+        $productos = Producto::select('id','codigo','descripcion','precio_libreria','unidad_medidas_id')->get();
+        $unidades  = UnidadMedida::select('id','nombre','factor')->get();
+dd($productos, $unidades);
+        return view('ventas.create', compact('productos','unidades'));
     }
 
-    /**
-     * Store a newly created Venta in storage.
-     */
+
     public function store(CreateVentaRequest $request)
     {
-        dd($request->all());
-        $input = $request->all();
+        dd($request);
+        DB::transaction(function() use ($request) {
 
-        /** @var Venta $venta */
-        $venta = Venta::create($input);
+            $venta = Venta::create([
+                'clientes_id' => $request->input('clientes_id'),
+                'total'       => $request->input('total'),
+                // otros campos de cabecera…
+            ]);
 
-        flash()->success('Venta guardado.');
+            $productoIds   = $request->input('producto_id', []);
+            $descripciones = $request->input('descripcion', []);
+            $listas        = $request->input('lista_precio', []);
+            $unidadesTxt   = $request->input('unidad', []);
+            $unidadesId    = $request->input('unidad_id', []);
+            $cantidades    = $request->input('cantidad', []);
+            $precios       = $request->input('precio_unitario', []);
+            $subtotales    = $request->input('subtotal', []);
 
-        return redirect(route('ventas.index'));
+            foreach ($productoIds as $i => $pid) {
+                DetalleVenta::create([
+                    'ventas_id'      => $venta->id,
+                    'producto_id'    => $pid ?: null,
+                    'descripcion'    => $descripciones[$i] ?? null,
+                    'lista_precio'   => $listas[$i] ?? 'venta',
+                    'unidad'         => $unidadesTxt[$i] ?? null,
+                    'unidad_id'      => $unidadesId[$i] ?? null,
+                    'cantidad'       => $cantidades[$i] ?? 1,
+                    'precio_unitario'=> $precios[$i] ?? 0,
+                    'subtotal'       => $subtotales[$i] ?? 0,
+                ]);
+            }
+        });
+
+        flash()->success('Venta guardada.');
+        return redirect()->route('ventas.index');
     }
+
 
     /**
      * Display the specified Venta.

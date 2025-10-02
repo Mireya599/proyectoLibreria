@@ -53,7 +53,15 @@
                                                 </select>
                                             </div>
                                         </div>
-
+                                        <div class="col-md-3 mb-2">
+                                            <label class="mb-1">Unidad de medida</label>
+                                            <select class="form-control" id="unidad_select" v-model="unidadSeleccionadaId">
+                                                <option value="">-- Selecciona --</option>
+                                                <option v-for="u in unidades" :key="u.id" :value="u.id">
+                                                    @{{ u.nombre }}
+                                                </option>
+                                            </select>
+                                        </div>
                                         <div class="col-md-2 col-6 mb-2">
                                             <label class="mb-1">Cantidad</label>
                                             <input type="number" min="1" class="form-control" id="cantidad_input"
@@ -109,28 +117,36 @@
                                                         <span class="font-weight-semibold">
                                                             @{{ it.codigo ? (it.codigo + ' - ') : '' }}@{{ it.descripcion }}
                                                         </span>
-                                                        <input type="hidden" name="producto_id[]" :value="it.id">
+
+                                                        <input type="hidden" name="producto_id[]"  :value="it.id">
+                                                        <input type="hidden" name="descripcion[]"  :value="it.descripcion"><!-- NUEVO -->
                                                         <input type="hidden" name="lista_precio[]" :value="it.lista">
                                                     </div>
                                                 </td>
+
                                                 <td class="text-center">
                                                     @{{ it.unidad }}
-                                                    <input type="hidden" name="unidad[]" :value="it.unidad">
+                                                    <input type="hidden" name="unidad[]"     :value="it.unidad">
+                                                    <input type="hidden" name="unidad_id[]"  :value="it.unidad_id">
                                                 </td>
+
                                                 <td class="text-right">
                                                     @{{ formatoQ(it.precio) }}
                                                     <input type="hidden" name="precio_unitario[]" :value="it.precio">
                                                 </td>
+
                                                 <td class="text-center">
                                                     <input type="number" min="1" class="form-control form-control-sm"
                                                            style="max-width:90px;margin:0 auto"
                                                            v-model.number="it.cantidad" @input="recalcular(idx)">
                                                     <input type="hidden" name="cantidad[]" :value="it.cantidad">
                                                 </td>
+
                                                 <td class="text-right">
                                                     @{{ formatoQ(it.subtotal) }}
                                                     <input type="hidden" name="subtotal[]" :value="it.subtotal">
                                                 </td>
+
                                                 <td class="text-center">
                                                     <button type="button" class="btn btn-sm btn-outline-danger"
                                                             @click="quitar(idx)" title="Quitar">
@@ -150,6 +166,8 @@
                                     </div>
                                 </div>
                             </div>
+                            <input type="hidden" name="total" :value="total">
+                            <input type="hidden" name="clientes_id" value="1">
 
                             <div class="mt-3 d-flex justify-content-end">
                                 <button type="submit" class="btn btn-primary" :disabled="items.length === 0">
@@ -183,11 +201,13 @@
         new Vue({
             el: '#venta',
             data: {
-                // Asegúrate de enviar estos campos desde el backend
-                // id, nombre, unidad, precio_venta, precio_mayorista, (opcional) codigo
+                // del backend
                 productos: @json($productos ?? []),
+                unidades:  @json($unidades  ?? []),
 
+                // selección en cabecera
                 productoSeleccionadoId: '',
+                unidadSeleccionadaId: '',  // NUEVO
                 cantidad: 1,
                 listaPrecio: 'venta',
 
@@ -208,27 +228,57 @@
                     const precioMayorista = Number(p.precio_mayorista || precioVenta);
                     return this.listaPrecio === 'mayorista' ? precioMayorista : precioVenta;
                 },
+                unidadLabelPorId(id){
+                    const u = this.unidades.find(x => String(x.id) === String(id));
+                    if(!u) return 'UND';
+                    return (u.nombre);
+                },
+                factorPorId(id){
+                    const u = this.unidades.find(x => String(x.id) === String(id));
+                    return u && Number(u.factor) > 0 ? Number(u.factor) : 1;
+                },
+
                 agregar(){
                     if(!this.productoSeleccionadoId){ alert('Selecciona un producto'); return; }
                     if(!this.cantidad || this.cantidad < 1){ alert('Ingresa una cantidad válida'); return; }
 
                     const p = this.productos.find(x => String(x.id) === String(this.productoSeleccionadoId));
-                    const precio = Number(this.precioDeLista(p) || 0);
-                    const cant   = Number(this.cantidad || 1);
+
+                    // 1) Precio base según la lista (venta/mayorista)
+                    const precioBase = Number(this.precioDeLista(p) || 0);
+
+                    // 2) Unidad base (del producto) y unidad seleccionada en el formulario
+                    const unidadBaseId = p?.unidad_medidas_id ?? null;
+                    const unidadSelId  = this.unidadSeleccionadaId || unidadBaseId;
+
+                    // 3) Factores
+                    const factorBase = this.factorPorId(unidadBaseId); // p.ej. Resma=500
+                    const factorSel  = this.factorPorId(unidadSelId);  // p.ej. Unidad_Papel=1, Caja x12=12
+
+                    // 4) Conversión de precio: base -> seleccionada
+                    const precioConv = Number((precioBase * (factorSel / factorBase)).toFixed(2));
+
+                    // 5) Resto de datos
+                    const cant      = Number(this.cantidad || 1);
+                    const unidadTxt = this.unidadLabelPorId(unidadSelId);
 
                     const item = {
                         id: p.id,
                         codigo: p.codigo || '',
                         descripcion: p.descripcion || '',
-                        unidad: p.unidad || 'UND',
-                        lista: this.listaPrecio,          // 'venta' o 'mayorista'
-                        precio: precio,                   // <— ahora viene de precio_libreria (o mayorista)
+                        unidad: unidadTxt,
+                        unidad_id: unidadSelId,
+                        lista: this.listaPrecio,
+                        precio: precioConv,
                         cantidad: cant,
-                        subtotal: Number((precio * cant).toFixed(2))
+                        subtotal: Number((precioConv * cant).toFixed(2))
                     };
 
                     this.items.push(item);
+
+                    // reset (si quieres conservar la unidad, no la borres)
                     this.productoSeleccionadoId = '';
+                    this.unidadSeleccionadaId   = '';
                     this.cantidad = 1;
                 },
 

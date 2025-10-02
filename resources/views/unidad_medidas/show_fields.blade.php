@@ -22,3 +22,9 @@
     <p>{{ $unidadMedida->equivalencia }}</p>
 </div>
 
+<!-- Factor Field -->
+<div class="col-sm-12">
+    {!! Form::label('factor', 'Factor:') !!}
+    <p>{{ $unidadMedida->factor }}</p>
+</div>
+

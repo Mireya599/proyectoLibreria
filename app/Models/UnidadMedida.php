@@ -18,14 +18,16 @@ class UnidadMedida extends Model
         'nombre',
         'categoria',
         'unidad_comercial',
-        'equivalencia'
+        'equivalencia',
+        'factor'
     ];
 
     protected $casts = [
         'nombre' => 'string',
         'categoria' => 'string',
         'unidad_comercial' => 'string',
-        'equivalencia' => 'string'
+        'equivalencia' => 'string',
+        'factor' => 'decimal:4'
     ];
 
     public static $rules = [
@@ -33,6 +35,7 @@ class UnidadMedida extends Model
         'categoria' => 'nullable|string|max:60',
         'unidad_comercial' => 'nullable|string|max:120',
         'equivalencia' => 'nullable|string|max:120',
+        'factor' => 'required|numeric',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
         'deleted_at' => 'nullable'

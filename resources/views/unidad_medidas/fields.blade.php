@@ -21,3 +21,9 @@
     {!! Form::label('equivalencia', 'Equivalencia:') !!}
     {!! Form::text('equivalencia', null, ['class' => 'form-control', 'maxlength' => 120, 'maxlength' => 120]) !!}
 </div>
+
+<!-- Factor Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('factor', 'Factor:') !!}
+    {!! Form::number('factor', null, ['class' => 'form-control', 'required']) !!}
+</div>

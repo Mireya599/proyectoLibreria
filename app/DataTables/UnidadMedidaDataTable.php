@@ -111,6 +111,7 @@ class UnidadMedidaDataTable extends DataTable
             Column::make('categoria'),
             Column::make('unidad_comercial'),
             Column::make('equivalencia'),
+            Column::make('factor'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
