@@ -46,7 +46,6 @@ class VentaController extends AppBaseController
 
         $productos = Producto::select('id','codigo','descripcion','precio_libreria','unidad_medidas_id')->get();
         $unidades  = UnidadMedida::select('id','nombre','factor')->get();
-        dd($productos, $unidades);
         return view('ventas.create', compact('productos','unidades'));
     }
 
