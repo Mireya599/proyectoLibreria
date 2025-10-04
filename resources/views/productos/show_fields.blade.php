@@ -1,66 +1,56 @@
-<!-- Codigo Field -->
-<div class="col-sm-12">
-    {!! Form::label('codigo', 'Codigo:') !!}
-    <p>{{ $producto->codigo }}</p>
+<div class="form-group col-sm-6">
+    {!! Form::label('codigo', 'Código:') !!}
+    {!! Form::text('codigo', $producto->codigo, [
+        'class' => 'form-control',
+        'readonly' => true
+    ]) !!}
 </div>
 
-<!-- Descripcion Field -->
-<div class="col-sm-12">
-    {!! Form::label('descripcion', 'Descripcion:') !!}
-    <p>{{ $producto->descripcion }}</p>
+<div class="form-group col-sm-6">
+    {!! Form::label('descripcion', 'Descripción:') !!}
+    {!! Form::text('descripcion', $producto->descripcion, [
+        'class' => 'form-control',
+        'readonly' => true
+    ]) !!}
 </div>
 
-<!-- Cantidad Field -->
-<div class="col-sm-12">
+<div class="form-group col-sm-6">
     {!! Form::label('cantidad', 'Cantidad:') !!}
-    <p>{{ $producto->cantidad }}</p>
+    {!! Form::number('cantidad', $producto->cantidad, [
+        'class' => 'form-control',
+        'readonly' => true
+    ]) !!}
 </div>
 
-<!-- Precio Fabrica Field -->
-<div class="col-sm-12">
-    {!! Form::label('precio_fabrica', 'Precio Fabrica:') !!}
-    <p>{{ $producto->precio_fabrica }}</p>
+<div class="form-group col-sm-6">
+    {!! Form::label('precio_fabrica', 'Precio Fábrica:') !!}
+    {!! Form::number('precio_fabrica', $producto->precio_fabrica, [
+        'class' => 'form-control',
+        'readonly' => true
+    ]) !!}
 </div>
 
-<!-- Total Fabrica Field -->
-<div class="col-sm-12">
-    {!! Form::label('total_fabrica', 'Total Fabrica:') !!}
-    <p>{{ $producto->total_fabrica }}</p>
+{{-- Relacionales --}}
+<div class="form-group col-sm-6">
+    {!! Form::label('categorias_id', 'Categoría') !!}
+    {!! Form::select('categorias_id', $categorias, $producto->categorias_id, [
+        'class' => 'form-control select2',
+        'disabled' => true
+    ]) !!}
 </div>
 
-<!-- Precio Libreria Field -->
-<div class="col-sm-12">
-    {!! Form::label('precio_libreria', 'Precio Libreria:') !!}
-    <p>{{ $producto->precio_libreria }}</p>
+<div class="form-group col-sm-6">
+    {!! Form::label('proveedores_id', 'Proveedor') !!}
+    {!! Form::select('proveedores_id', $proveedores, $producto->proveedores_id, [
+        'class' => 'form-control select2',
+        'disabled' => true
+    ]) !!}
 </div>
 
-<!-- Total Libreria Field -->
-<div class="col-sm-12">
-    {!! Form::label('total_libreria', 'Total Libreria:') !!}
-    <p>{{ $producto->total_libreria }}</p>
+<div class="form-group col-sm-6">
+    {!! Form::label('unidad_medida_id', 'Unidad de Medida') !!}
+    {!! Form::select('unidad_medida_id', $unidades, $producto->unidad_medida_id, [
+        'class' => 'form-control select2',
+        'disabled' => true
+    ]) !!}
 </div>
-
-<!-- Ganancia Field -->
-<div class="col-sm-12">
-    {!! Form::label('ganancia', 'Ganancia:') !!}
-    <p>{{ $producto->ganancia }}</p>
-</div>
-
-<!-- Categorias Id Field -->
-<div class="col-sm-12">
-    {!! Form::label('categorias_id', 'Categorias Id:') !!}
-    <p>{{ $producto->categorias_id }}</p>
-</div>
-
-<!-- Proveedores Id Field -->
-<div class="col-sm-12">
-    {!! Form::label('proveedores_id', 'Proveedores Id:') !!}
-    <p>{{ $producto->proveedores_id }}</p>
-</div>
-
-<!-- Unidad Medidas Id Field -->
-<div class="col-sm-12">
-    {!! Form::label('unidad_medidas_id', 'Unidad Medidas Id:') !!}
-    <p>{{ $producto->unidad_medidas_id }}</p>
-</div>
-

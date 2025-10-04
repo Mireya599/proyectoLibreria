@@ -72,16 +72,18 @@ class ProductoController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var Producto $producto */
         $producto = Producto::find($id);
 
         if (empty($producto)) {
             flash()->error('Producto no encontrado');
-
             return redirect(route('productos.index'));
         }
 
-        return view('productos.show')->with('producto', $producto);
+        $categorias = Categoria::pluck('nombre', 'id');
+        $proveedores = Proveedor::pluck('nombre', 'id');
+        $unidades    = UnidadMedida::pluck('nombre', 'id');
+
+        return view('productos.show', compact('producto', 'categorias', 'proveedores', 'unidades'));
     }
 
     /**
