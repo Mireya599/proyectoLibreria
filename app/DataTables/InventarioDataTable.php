@@ -2,14 +2,12 @@
 
 namespace App\DataTables;
 
-use App\Models\Venta;
+use App\Models\Inventario;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Services\DataTable;
-use Illuminate\Database\Query\Builder;
 
-
-class VentaDataTable extends DataTable
+class InventarioDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -22,13 +20,13 @@ class VentaDataTable extends DataTable
 
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', function(Venta $venta){
-                $id = $venta->id;
-                return view('ventas.datatables_actions',compact('venta','id'));
+            ->addColumn('action', function(Inventario $inventario){
+                $id = $inventario->id;
+                return view('inventarios.datatables_actions',compact('inventario','id'));
             })
-            ->editColumn('id',function (Venta $venta){
+            ->editColumn('id',function (Inventario $inventario){
 
-                return $venta->id;
+                return $inventario->id;
 
             })
             ->rawColumns(['action']);
@@ -37,10 +35,10 @@ class VentaDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Venta $model
+     * @param \App\Models\Inventario $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Venta $model)
+    public function query(Inventario $model)
     {
         return $model->newQuery()->select($model->getTable().'.*');
     }
@@ -109,11 +107,12 @@ class VentaDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('codigo_factura'),
-            Column::make('total'),
-            Column::make('tipo_pago'),
-            Column::make('fecha_venta'),
-            Column::make('clientes_id'),
+            Column::make('producto_id'),
+            Column::make('stock'),
+            Column::make('stock_minimo'),
+            Column::make('stock_maximo'),
+            Column::make('costo_promedio'),
+            Column::make('ubicacion'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
@@ -129,6 +128,6 @@ class VentaDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'ventas_datatable_' . time();
+        return 'inventarios_datatable_' . time();
     }
 }

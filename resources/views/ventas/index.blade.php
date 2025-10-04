@@ -41,6 +41,16 @@
 
                                 <div class="card-body">
                                     <div class="form-row">
+                                        <div class="col-md-6 mb-2">
+                                            <label class="mb-1">Cliente</label>
+                                            <select class="form-control" name="clientes_id" required>
+                                                <option value="">-- Selecciona cliente --</option>
+                                                @foreach($clientes as $c)
+                                                    <option value="{{ $c->id }}">{{ $c->nombre }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
                                         <div class="col-md-7 mb-2">
                                             <label class="mb-1">Buscar producto</label>
                                             <div class="input-group">

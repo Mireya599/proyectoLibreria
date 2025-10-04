@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Models\UnidadMedida;
 use Illuminate\Support\Facades\DB;
 use App\Models\DetalleVenta;
+use App\Models\Cliente;
 
 class VentaController extends AppBaseController
 {
@@ -31,8 +32,9 @@ class VentaController extends AppBaseController
 
         $productos = Producto::select('id','codigo','descripcion','precio_libreria','unidad_medidas_id')->get();
         $unidades  = UnidadMedida::select('id','nombre','factor')->get();
+        $clientes  = Cliente::select('id','nombre')->get();
 
-        return $ventaDataTable->render('ventas.index', compact('productos','unidades'));
+        return $ventaDataTable->render('ventas.index', compact('productos','unidades', 'clientes'));
     }
 
 

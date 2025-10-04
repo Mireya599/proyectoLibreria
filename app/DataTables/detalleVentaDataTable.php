@@ -21,15 +21,12 @@ class DetalleVentaDataTable extends DataTable
         return datatables()
             ->eloquent($query)
 
-            // Columna compuesta: nombre/código del producto
             ->addColumn('producto', function (DetalleVenta $d) {
-                // Asume relación producto()->belongsTo(Producto::class)
                 $codigo = $d->producto->codigo ?? null;
                 $desc   = $d->producto->descripcion ?? $d->descripcion ?? '—';
                 return $codigo ? ($codigo.' - '.$desc) : $desc;
             })
 
-            // Formato moneda server-side
             ->editColumn('precio_unitario', fn(DetalleVenta $d) =>
             number_format((float) $d->precio_unitario, 2, '.', ',')
             )
@@ -37,30 +34,36 @@ class DetalleVentaDataTable extends DataTable
             number_format((float) $d->subtotal, 2, '.', ',')
             )
 
-            // (Opcional) Mostrar # de venta como link si tienes ruta show
             ->addColumn('venta', function (DetalleVenta $d) {
-                $id = $d->venta->id ?? $d->venta_id;
-                // return '<a href="'.route('ventas.show', $id).'">#'.$id.'</a>';
+                $id = $d->venta->id ?? $d->ventas_id;   // usa ventas_id si no tienes relación cargada
                 return '#'.$id;
             })
 
-            // Acciones
             ->addColumn('action', function(DetalleVenta $detalleVenta){
                 $id = $detalleVenta->id;
                 return view('detalle_ventas.datatables_actions', compact('detalleVenta','id'));
             })
 
-            // Filtro por producto (busca en descripcion/codigo de productos)
-            ->filterColumn('producto', function (Builder $q, $kw) {
-                $kw = trim($kw);
-                $q->where(function($qq) use ($kw) {
-                    $qq->where('productos.descripcion', 'LIKE', "%{$kw}%")
-                        ->orWhere('productos.codigo', 'LIKE', "%{$kw}%");
-                });
+            // === NUEVO: ordenar por columnas calculadas ===
+            ->orderColumn('producto', function($q, $order){
+                // primero por descripción y luego por código
+                $q->orderBy('productos.descripcion', $order)
+                    ->orderBy('productos.codigo', $order);
+            })
+            ->orderColumn('venta', function($q, $order){
+                // ordena por id de la venta
+                $q->orderBy('detalle_ventas.ventas_id', $order);
             })
 
-            ->rawColumns(['action'/*, 'venta'*/]); // descomenta 'venta' si devuelves <a>
+            // Ya tienes filterColumn para 'producto'; opcional filtrar por #venta:
+            ->filterColumn('venta', function($q, $kw){
+                $kw = ltrim(trim($kw), '#');
+                $q->where('detalle_ventas.ventas_id', 'LIKE', "%{$kw}%");
+            })
+
+            ->rawColumns(['action']); // si 'venta' devolviera <a>, agrega 'venta' aquí
     }
+
 
     /**
      * Get query source of dataTable.
