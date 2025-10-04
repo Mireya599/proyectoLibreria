@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title> @yield("titulo_pagina") - {{config('app.name')}} </title>
+    <title> @yield("titulo_pagina") - Libreria y Comercial Andolfo</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

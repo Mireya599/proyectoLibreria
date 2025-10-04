@@ -5,7 +5,7 @@
 @section('content')
     <div class="login-box">
         <div class="login-logo">
-            <a href="{{ route('home') }}"><b>{{ config('app.name', 'Laravel') }}</b></a>
+            <a href="{{ route('home') }}"><b>Libreria y Comercial Andolfo</b></a>
         </div>
         <div class="card">
             <div class="card-body register-card-body">

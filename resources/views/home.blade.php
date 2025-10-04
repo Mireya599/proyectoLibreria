@@ -53,19 +53,19 @@
                         </a>
                     </div>
 
-                    <div class="col-6 col-lg-2 px-4 py-2">
-                        <a href="{{ route('compras.create') }}">
-                            <div class="card text-center">
-                                <div class="card-body p-1">
-                                  <span class="fa-stack fa-xl my-2">
-                                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                                    <i class="fa fa-truck fa-stack-1x fa-inverse"></i>
-                                  </span>
-                                    <p class="card-text mb-2">Registrar Compra</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+{{--                    <div class="col-6 col-lg-2 px-4 py-2">--}}
+{{--                        <a href="{{ route('compras.create') }}">--}}
+{{--                            <div class="card text-center">--}}
+{{--                                <div class="card-body p-1">--}}
+{{--                                  <span class="fa-stack fa-xl my-2">--}}
+{{--                                    <i class="fa fa-circle fa-stack-2x text-primary"></i>--}}
+{{--                                    <i class="fa fa-truck fa-stack-1x fa-inverse"></i>--}}
+{{--                                  </span>--}}
+{{--                                    <p class="card-text mb-2">Registrar Compra</p>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
 
                 </div>
 

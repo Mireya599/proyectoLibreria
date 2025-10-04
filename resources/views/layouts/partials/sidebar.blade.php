@@ -4,7 +4,7 @@
     <a href="{{route('home')}}" class="brand-link navbar- bg-success">
         <img src="{{getLogo()}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
              style="opacity: .8">
-        <span class="brand-text font-weight-light">Libreria Andolfo</span>
+        <span class="brand-text font-weight-light">Libreria y C. Andolfo</span>
     </a>
 
     <!-- Sidebar -->
