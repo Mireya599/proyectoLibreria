@@ -53,6 +53,7 @@ class VentaController extends AppBaseController
     public function store(CreateVentaRequest $request)
     {
 //        dd($request);
+
         DB::transaction(function() use ($request) {
 
             $venta = Venta::create([
