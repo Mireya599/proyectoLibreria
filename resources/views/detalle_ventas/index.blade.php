@@ -13,13 +13,13 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item">
-                            <a class="btn btn-outline-success"
-                               href="{{ route('detalleVentas.create') }}">
-                                <i class="fa fa-plus"></i>
-                                <span class="d-none d-sm-inline">Nuevo</span>
-                            </a>
-                        </li>
+{{--                        <li class="breadcrumb-item">--}}
+{{--                            <a class="btn btn-outline-success"--}}
+{{--                               href="{{ route('detalleVentas.create') }}">--}}
+{{--                                <i class="fa fa-plus"></i>--}}
+{{--                                <span class="d-none d-sm-inline">Nuevo</span>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
                     </ol>
                 </div>
             </div>
